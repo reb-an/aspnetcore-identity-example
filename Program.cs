@@ -1,3 +1,4 @@
+using aspnetcore_identity_example;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,13 +8,13 @@ var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddDbContext<DbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
 
 builder
     .Services.AddDefaultIdentity<IdentityUser>(options =>
         options.SignIn.RequireConfirmedAccount = true
     )
-    .AddEntityFrameworkStores<DbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
