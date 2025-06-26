@@ -1,9 +1,10 @@
 using aspnetcore_identity_example;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
 
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
@@ -16,11 +17,12 @@ builder
     {
         options.SignIn.RequireConfirmedAccount = true;
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddIdentityApiEndpoints<IdentityUser>();
 
+builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -53,5 +55,7 @@ app.MapStaticAssets();
 app.MapControllers();
 
 app.MapRazorPages().WithStaticAssets();
+
+app.MapIdentityApi<IdentityUser>();
 
 app.Run();
