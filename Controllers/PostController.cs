@@ -1,4 +1,5 @@
 using aspnetcore_identity_example.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,12 +17,14 @@ public class PostController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<Post>>> GetAll()
     {
         return await _context.Posts.ToListAsync();
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult<Post>> CreatePost(CreatePostDto newPostPayload)
     {
         Post post = new Post
