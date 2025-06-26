@@ -12,7 +12,7 @@ using aspnetcore_identity_example;
 namespace aspnetcore_identity_example.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250625221751_AddIdentity")]
+    [Migration("20250626164254_AddIdentity")]
     partial class AddIdentity
     {
         /// <inheritdoc />
@@ -168,12 +168,10 @@ namespace aspnetcore_identity_example.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
@@ -210,12 +208,10 @@ namespace aspnetcore_identity_example.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
