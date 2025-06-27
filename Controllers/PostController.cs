@@ -17,14 +17,14 @@ public class PostController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<Post>>> GetAll()
     {
         return await _context.Posts.ToListAsync();
     }
 
     [HttpPost]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<Post>> CreatePost(CreatePostDto newPostPayload)
     {
         Post post = new Post
